@@ -1,5 +1,6 @@
 const shuffle = require('shuffle-array');
-var restaurants=['판치야','129라멘','버거킹','가나안 감자탕','따이한','스타벅스','돈돈돈까스','스시도','함흥에겨울냉면','송림','별내옥설렁탕','압구정 부대찌개','써브웨이 약수점','맹산','푸줏간'];
+var restaurants=['판치야','129라멘','버거킹','가나안 감자탕','따이한','스타벅스','돈돈돈까스','스시도','함흥에겨울냉면','송림','별내옥설렁탕','압구정 부대찌개','써브웨이 약수점','맹산','푸줏간','두부집','어게인리프레쉬 장충점','닥터박스','파리바게트','고등어구이집'];
+var lowRestaurants=['스타벅스','써브웨이 약수점','두부집','어게인리프레쉬 장충점','닥터박스','파리바게트'];
 var message = {
     replace_original:'false',
     text: '오늘의 점심 메뉴를 고민 중 이시군요?',
@@ -50,7 +51,48 @@ exports.messageMake = function(){
     newMessage.attachments = attachArray
     return newMessage
 };
+exports.dietmessageMake = function(){
+  actionCounter = 0;
+  var newMessage = message;
 
+  shuffle(lowRestaurants);
+  var action =[
+      {
+        name: 'restaurant',
+        text: lowRestaurants[0],
+        type: 'button',
+        value: lowRestaurants[0]
+      },
+      {
+        name: 'restaurant',
+        text: lowRestaurants[1],
+        type: 'button',
+        value: lowRestaurants[1]
+      },
+      {
+        name: 'restaurant',
+        text: lowRestaurants[2],
+        type: 'button',
+        value: lowRestaurants[2]
+      },
+      {
+        name: "dietrepick",
+        text: "다시 뽑아줘",
+        style: "danger",
+        type: "button",
+        value: "다시 뽑기"
+
+      }
+    ];
+
+    var attach = new Object();
+    attach.text ='오늘 제안하는 가벼운 메뉴입니다.:herb:';
+    attach.actions=action;
+    attach.callback_id='restarauntSelector'
+    var attachArray = [attach];
+    newMessage.attachments = attachArray
+    return newMessage
+};
 exports.reMessageMake = function(){
   actionCounter=0;
   var newMessage = message;
@@ -87,6 +129,49 @@ exports.reMessageMake = function(){
 
     var attach = new Object();
     attach.text ='다시 제안하는 메뉴입니다.:yum:';
+    attach.actions=action;
+    attach.callback_id='restarauntReSelector'
+    var attachArray = [attach];
+    newMessage.attachments = attachArray
+    return newMessage
+
+};
+exports.dietreMessageMake = function(){
+  actionCounter=0;
+  var newMessage = message;
+  shuffle(lowRestaurants);
+  var action =[
+      {
+        name: 'restaurant',
+        text: lowRestaurants[0],
+        type: 'button',
+        value: lowRestaurants[0]
+      },
+      {
+        name: 'restaurant',
+        text: lowRestaurants[1],
+        type: 'button',
+        value: lowRestaurants[1]
+      },
+      {
+        name: 'restaurant',
+        text: lowRestaurants[2],
+        type: 'button',
+        value: lowRestaurants[2]
+      },
+      {
+        name: "dietrepick",
+        text: "다시 뽑아줘",
+        style: "danger",
+        type: "button",
+        value: "다시 뽑기"
+
+      }
+    ];
+
+
+    var attach = new Object();
+    attach.text ='다시 제안하는 가벼운 메뉴입니다.:yum:';
     attach.actions=action;
     attach.callback_id='restarauntReSelector'
     var attachArray = [attach];

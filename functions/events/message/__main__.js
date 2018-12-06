@@ -43,7 +43,9 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
     })
   } else if (text.match(/오늘 뭐 먹지|뭐 먹지|뭐먹지|점심/i)) {
     callback(null,picker.messageMake());
-  }else {
+  } else if (text.match(/다이어트|다이어트식단|가벼운|어린이집 메뉴|어린이집 식단|살빼기/i)) {
+    callback(null,picker.dietmessageMake());
+  } else {
     callback(null, {});
   }
 
